@@ -26,14 +26,13 @@ l2Alchemy.ws.on(
     topics: [DepositFinalizedEvent],
   },
   async (data) => {
-    console.log("DepositFinalized Event from Bridge Received", data);
     const { l1Token, l2Token, from, to, amount } = eventInterfaces.decodeEventLog(
       "DepositFinalized",
       data.data,
       data.topics
     );
-    console.log("DepositFinalized Event Decode Result");
-    console.log({ l1Token }, { l2Token }, { from }, { to }, { amount });
+    // l1BridgeUtil.checkBalance(l1Token, amount, true);
+    l2BridgeUtil.checkBalance(l2Token, amount, true);
   }
 );
 
